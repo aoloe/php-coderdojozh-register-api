@@ -11,22 +11,14 @@ $app->get('/event/{id}/rvsps', function (Request $request, Response $response, a
     $this->logger->info("coderdojo-zh 'rvsps' route");
     $eventId = (int) $args['id'];
     $result = $this->data->getRvsp($eventId);
-    return $response
-        ->withJson($result)
-        ->withHeader('Access-Control-Allow-Origin', 'http://coderdojozh.github.io')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET');
+    return $response->withJson($result);
 });
 
 $app->get('/event/{id}', function (Request $request, Response $response, array $args) {
     $this->logger->info("coderdojo-zh '/event' route");
     $eventId = (int) $args['id'];
     $result = $this->data->getEvent($eventId);
-    return
-        $response->withJson($result)
-        ->withHeader('Access-Control-Allow-Origin', 'http://coderdojozh.github.io')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET');
+    return $response->withJson($result);
 });
 
 $app->post('/event/{eventId}/participant/{userId}', function (Request $request, Response $response, array $args) {
@@ -41,12 +33,7 @@ $app->post('/event/{eventId}/participant/{userId}', function (Request $request, 
         $this->data->setParticipants($eventId, $userId, $values['count']);
     }
 
-    return $response
-        ->getBody()
-        ->withHeader('Access-Control-Allow-Origin', 'http://coderdojozh.github.io')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'POST,OPTIONS')
-        ->write(true);
+    return $response->getBody()->write(true);
 });
 
 $app->get('/', function (Request $request, Response $response, array $args) {
