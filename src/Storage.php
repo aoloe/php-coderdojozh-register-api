@@ -43,6 +43,24 @@ class Storage
         $result = file_put_contents($filepath, json_encode($data));
     }
 
+    public function getParticipantsArchive()
+    {
+        $result = [];
+        $filepath = $this->path.'/participants.json';
+        if (file_exists($filepath)) {
+            $result = file_get_contents($filepath);
+            $result = json_decode($result, true);
+        }
+        return $result;
+    }
+
+    public function setParticipantsArchive($data)
+    {
+        $filepath = $this->path.'/participants.json';
+        $result = file_put_contents($filepath, json_encode($data));
+    }
+
+
     public function create($details = null)
     {
         if (isset($data)) {
